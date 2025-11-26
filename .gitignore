@@ -52,6 +52,7 @@ logs/
 !.env.example
 
 # Разное
+anaconda_projects/
 *.tmp
 *.bak
 *.old
