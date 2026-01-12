@@ -1,0 +1,74 @@
+[
+    {
+        "dataset": "S07-hw-dataset-02.csv",
+        "models": [
+            {
+                "algo": "kmeans",
+                "silhouette": 0.31,
+                "davies_bouldin": 1.32,
+                "calinski_harabasz": 3573.39
+            },
+            {
+                "algo": "dbscan",
+                "silhouette": 0.25,
+                "davies_bouldin": 0.74,
+                "calinski_harabasz": 26.17,
+                "noise_frac": 0.06
+            },
+            {
+                "algo": "agglomerative",
+                "silhouette": 0.42,
+                "davies_bouldin": 0.88,
+                "calinski_harabasz": 395.48
+            }
+        ]
+    },
+    {
+        "dataset": "S07-hw-dataset-03.csv",
+        "models": [
+            {
+                "algo": "kmeans",
+                "silhouette": 0.33,
+                "davies_bouldin": 1.11,
+                "calinski_harabasz": 6941.48
+            },
+            {
+                "algo": "dbscan",
+                "silhouette": 0.24,
+                "davies_bouldin": 0.65,
+                "calinski_harabasz": 11.24,
+                "noise_frac": 0.01
+            },
+            {
+                "algo": "agglomerative",
+                "silhouette": 0.36,
+                "davies_bouldin": 0.59,
+                "calinski_harabasz": 25.2
+            }
+        ]
+    },
+    {
+        "dataset": "S07-hw-dataset-04.csv",
+        "models": [
+            {
+                "algo": "kmeans",
+                "silhouette": 0.48,
+                "davies_bouldin": 0.91,
+                "calinski_harabasz": 5899.35
+            },
+            {
+                "algo": "dbscan",
+                "silhouette": 0.48,
+                "davies_bouldin": 0.91,
+                "calinski_harabasz": 5901.36,
+                "noise_frac": 0.0
+            },
+            {
+                "algo": "agglomerative",
+                "silhouette": 0.48,
+                "davies_bouldin": 0.91,
+                "calinski_harabasz": 5899.35
+            }
+        ]
+    }
+]

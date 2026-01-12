@@ -1,0 +1,86 @@
+[
+    {
+        "dataset": "S07-hw-dataset-02.csv",
+        "models": [
+            {
+                "algo": "kmeans",
+                "params": {
+                    "k": 2
+                },
+                "criterion": "biggest silhouette"
+            },
+            {
+                "algo": "dbscan",
+                "params": {
+                    "eps": 0.5,
+                    "min_samples": 10
+                },
+                "criterion": "biggest silhouette, noise_frac <= 0.15"
+            },
+            {
+                "algo": "agglomerative",
+                "params": {
+                    "k": 2,
+                    "linkage": "average"
+                },
+                "criterion": "biggest silhouette"
+            }
+        ]
+    },
+    {
+        "dataset": "S07-hw-dataset-03.csv",
+        "models": [
+            {
+                "algo": "kmeans",
+                "params": {
+                    "k": 4
+                },
+                "criterion": "biggest silhouette"
+            },
+            {
+                "algo": "dbscan",
+                "params": {
+                    "eps": 0.5,
+                    "min_samples": 10
+                },
+                "criterion": "biggest silhouette, noise_frac <= 0.15"
+            },
+            {
+                "algo": "agglomerative",
+                "params": {
+                    "k": 2,
+                    "linkage": "average"
+                },
+                "criterion": "biggest silhouette"
+            }
+        ]
+    },
+    {
+        "dataset": "S07-hw-dataset-04.csv",
+        "models": [
+            {
+                "algo": "kmeans",
+                "params": {
+                    "k": 5
+                },
+                "criterion": "biggest silhouette"
+            },
+            {
+                "algo": "dbscan",
+                "params": {
+                    "eps": 3.0,
+                    "min_samples": 3
+                },
+                "criterion": "biggest silhouette, noise_frac <= 0.15"
+            },
+            {
+                "algo": "agglomerative",
+                "params": {
+                    "k": 5,
+                    "linkage": "ward"
+                },
+                "criterion": "biggest silhouette"
+            }
+        ]
+    }
+]
