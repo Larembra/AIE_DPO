@@ -27,16 +27,16 @@
 
 ## 4. Results
 
-|   accuracy |        f1 |   roc_auc | model                  |
-|-----------:|----------:|----------:|:-----------------------|
-|    0.97744 | 0.706861  |  0.906617 | Hist_gradient_boosting |
-|    0.97952 | 0.751938  |  0.904335 | Stacking(dt+rf+hgb)    |
-|    0.96736 | 0.502439  |  0.897232 | Random_forest          |
-|    0.95312 | 0.0928793 |  0.847191 | log_reg(scaled)        |
-|    0.96736 | 0.573222  |  0.777499 | Decision_tree          |
-|    0.95088 | 0         |  0.5      | dummy(most frequent)   |
+|   accuracy |        f1 |   roc_auc | model              |
+|-----------:|----------:|----------:|:-------------------|
+|    0.97744 | 0.706861  |  0.906617 | Boosting           |
+|    0.97952 | 0.751938  |  0.904335 | Stacking           |
+|    0.96736 | 0.502439  |  0.897232 | RandomForest       |
+|    0.95312 | 0.0928793 |  0.847191 | LogisticRegression |
+|    0.96736 | 0.573222  |  0.777499 | DecisionTree       |
+|    0.95088 | 0         |  0.5      | Dummy              |
 
-- Hist_gradient_boosting победила по ROC-AUC.
+- Boosting победила по ROC-AUC.
 
 ## 5. Analysis
 

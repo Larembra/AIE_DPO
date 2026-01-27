@@ -1,5 +1,5 @@
 {
-    "log_reg(scaled)": {
+    "LogisticRegression": {
         "best_params": {
             "lr__C": 0.001,
             "lr__penalty": "l2",
@@ -7,7 +7,7 @@
         },
         "best_cv_roc_auc": 0.8287419831906675
     },
-    "Decision_tree": {
+    "DecisionTree": {
         "best_params": {
             "ccp_alpha": 0,
             "max_depth": 10,
@@ -15,7 +15,7 @@
         },
         "best_cv_roc_auc": 0.7889001510725856
     },
-    "Random_forest": {
+    "RandomForest": {
         "best_params": {
             "max_depth": 10,
             "max_features": "sqrt",
@@ -23,7 +23,7 @@
         },
         "best_cv_roc_auc": 0.8811488963987173
     },
-    "Hist_gradient_boosting": {
+    "Boosting": {
         "best_params": {
             "learning_rate": 0.1,
             "max_depth": 3,

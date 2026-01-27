@@ -1,10 +1,10 @@
 {
-    "best_model_label": "Hist_gradient_boosting",
+    "best_model_label": "Boosting",
     "test_metrics": {
         "accuracy": 0.97744,
         "f1": 0.7068607068607069,
         "roc_auc": 0.9066166584726455,
-        "model": "Hist_gradient_boosting"
+        "model": "Boosting"
     },
     "search_summary": {
         "best_params": {
