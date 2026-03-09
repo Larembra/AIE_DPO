@@ -1,0 +1,18 @@
+{
+    "hidden sizes": [
+        64,
+        32
+    ],
+    "activation": "relu",
+    "dropout": 0,
+    "batchnorm": true,
+    "early_stopping": true,
+    "optimizer": "Adam",
+    "lr": 0.001,
+    "momentum": 0,
+    "weight_decay": 0,
+    "criterion": "CrossEntropyLoss",
+    "epochs_trained": 50,
+    "seed": 42,
+    "dataset": "EMNIST"
+}
