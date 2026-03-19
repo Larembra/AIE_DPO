@@ -1,0 +1,17 @@
+{
+    "dataset": "STL10",
+    "architecture": "resnet18, model.fc = nn.Linear(model.fc.in_features, 10)",
+    "transforms": {
+        "train_tf_aug": "Resize(IMG_SIZE + 32) - RandomResizedCrop(IMG_SIZE, scale=(0.7, 1.0)) - RandomHorizontalFlip(p=0.5) - ToTensor() - Normalize(STL10_MEAN, STL10_STD)",
+        "eval_tf": "Resize(IMG_SIZE + 32) - CenterCrop(IMG_SIZE) - ToTensor() - Normalize(STL10_MEAN, STL10_STD)"
+    },
+    "activation": "relu",
+    "dropout": 0,
+    "batchnorm": true,
+    "early_stopping": true,
+    "optimizer": "Adam",
+    "lr": 0.001,
+    "criterion": "CrossEntropyLoss",
+    "epochs_trained": 8,
+    "seed": 42
+}
