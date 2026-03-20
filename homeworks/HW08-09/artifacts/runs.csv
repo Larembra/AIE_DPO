@@ -3,6 +3,6 @@ E1,EMNIST,42,"hidden sizes: (64, 32), activation: relu, dropout: 0, batchnorm: F
 E2,EMNIST,42,"hidden sizes: (64, 32), activation: relu, dropout: 0.2, batchnorm: False",Adam,0.001,0.0,0.0,10,0.7299929178470255,0.8897715874501734
 E3,EMNIST,42,"hidden sizes: (64, 32), activation: relu, dropout: 0, batchnorm: True",Adam,0.001,0.0,0.0,10,0.8210871104815864,0.5544989418460019
 E4,EMNIST,42,"hidden sizes: (64, 32), activation: relu, dropout: 0, batchnorm: True",Adam,0.001,0.0,0.0,50,0.8256905099150141,0.5446017773310118
-O1,EMNIST,42,"hidden sizes: (64, 32), activation: relu, dropout: 0, batchnorm: True",Adam,0.1,0.0,0.0,8,0.7671299575070821,0.7545593242469658
-O2,EMNIST,42,"hidden sizes: (64, 32), activation: relu, dropout: 0, batchnorm: True",Adam,1e-05,0.0,0.0,8,0.4927407932011331,2.589210983038624
-O3,EMNIST,42,"hidden sizes: (64, 32), activation: relu, dropout: 0, batchnorm: True",SGD,0.001,0.9,0.0001,10,0.8022308781869688,0.6237054744117996
+O1,EMNIST,42,"hidden sizes: (64, 32), activation: relu, dropout: 0, batchnorm: True",Adam,0.1,0.0,0.0,8,0.7569493626062322,0.7801959888624402
+O2,EMNIST,42,"hidden sizes: (64, 32), activation: relu, dropout: 0, batchnorm: True",Adam,1e-05,0.0,0.0,8,0.5124380311614731,2.5594370203045207
+O3,EMNIST,42,"hidden sizes: (64, 32), activation: relu, dropout: 0, batchnorm: True",SGD,0.001,0.9,0.0001,10,0.7978045325779037,0.6372099761078108
