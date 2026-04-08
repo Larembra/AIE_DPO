@@ -1,0 +1,11 @@
+question,answer,retrieved_sources
+What is Git and why is it used?,Git include: - branching and merging - distributed workflow - history tracking - collaboration support Git is widely used in modern software widely used in modern software development and is supported by platforms like GitHub and GitLab.,"doc_04, doc_04, doc_04"
+What information is stored in a Git commit?,A commit in Git is a snapshot of the repository at a specific point in time. Each commit represents the state of the project at a specific point in time.,"doc_02, doc_05, doc_04"
+Why are branches useful in Git?,A branch in Git is a lightweight movable pointer to a commit. Example: git checkout main git merge feature-login Merge preserves the full history of both branches.,"doc_01, doc_06, doc_01"
+How does git merge combine changes?,Git merge is used to combine changes from one branch into another. Git merge and git rebase are both used to integrate changes from one branch into another.,"doc_07, doc_06, doc_03"
+What does git rebase do to commit history?,"of creating a merge commit, rebase rewrites the commit history. Git log shows the commit history of a repository.","doc_05, doc_09, doc_07"
+What is the difference between merge and rebase?,Git merge and git rebase are both used to integrate changes from one branch into another. Rebase is useful for cleaning up,"doc_07, doc_07, doc_09"
+Why do merge conflicts occur?,"In some cases, conflicts may occur if the same lines of code were changed differently. A merge conflict occurs when Git cannot automatically resolve differences between branches.","doc_03, doc_03, doc_06"
+When should you use git stash?,Example: git stash git checkout main To restore changes: git stash apply Stash is useful when you need Git stash temporarily saves changes that are not ready to be committed.,"doc_11, doc_04, doc_11"
+What is the difference between git reset and git revert?,Git reset and git revert are used to undo changes. Git merge and git rebase are both used to integrate changes from one branch into another.,"doc_10, doc_07, doc_09"
+How does git pull differ from git fetch?,Git fetch downloads changes from a remote repository but does not apply them. Git pull fetches changes and merges them into the,"doc_08, doc_12, doc_13"

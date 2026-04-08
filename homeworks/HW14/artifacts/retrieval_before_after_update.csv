@@ -1,0 +1,15 @@
+query,before_retrieved_sources,after_retrieved_sources,changed
+What is Git and what is it used for?,doc_04,doc_04,False
+What does a Git commit contain?,"doc_02, doc_05, doc_04","doc_02, doc_05, doc_04",False
+Why are branches used in Git?,"doc_01, doc_09, doc_03","doc_01, doc_09, doc_03",False
+How does git merge work?,"doc_07, doc_06, doc_03","doc_07, doc_06, doc_03",False
+What does git rebase do?,"doc_09, doc_07, doc_04","doc_09, doc_07, doc_04",False
+What is the difference between merge and rebase?,"doc_07, doc_09","doc_07, doc_09",False
+Why do merge conflicts happen?,"doc_03, doc_06","doc_03, doc_06",False
+What is git stash used for?,"doc_04, doc_11","doc_04, doc_11",False
+What is the difference between git reset and git revert?,"doc_10, doc_07, doc_09","doc_10, doc_07, doc_09",False
+What is the difference between git pull and git fetch?,"doc_08, doc_12, doc_04","doc_08, doc_12, doc_04",False
+How can I view Git commit history?,"doc_05, doc_02, doc_04","doc_05, doc_02, doc_04",False
+What is the basic Git workflow?,"doc_04, doc_12","doc_04, doc_12",False
+What are Git tags and why are they used?,doc_04,"doc_13, doc_04",True
+How do remote repositories work in Git and which commands are commonly used?,doc_04,"doc_14, doc_04",True
