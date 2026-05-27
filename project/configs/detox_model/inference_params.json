@@ -1,0 +1,8 @@
+{
+  "max_len": 100,
+  "beam_width": 4,
+  "bos_id": 1,
+  "eos_id": 2,
+  "pad_id": 0,
+  "unk_id": 3
+}

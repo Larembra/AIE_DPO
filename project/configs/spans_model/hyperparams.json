@@ -1,0 +1,9 @@
+{
+  "model": "GRU-tagger",
+  "vocab_size": 3730,
+  "embed_dim": 100,
+  "hidden_size": 128,
+  "num_layers": 2,
+  "dropout": 0.3,
+  "rnn_type": "GRU"
+}

@@ -1,0 +1,8 @@
+{
+  "model_type": "Transformer",
+  "vocab_size": 7849,
+  "hidden_size": 128,
+  "num_layers": 2,
+  "dropout": 0.3,
+  "bidirectional": false
+}

@@ -1,7 +1,7 @@
 [project]
 name = "detox-project"
 version = "0.1.0"
-description = "AI detoxification service with NLP + frontend and backend"
+description = "AI detoxification service with NLP + FastAPI"
 authors = [{ name = "Larembra" }]
 readme = "README.md"
 requires-python = ">=3.10"
