@@ -22,7 +22,8 @@ dependencies = [
 "psycopg2-binary",
 "python-dotenv",
 "httpx",
-"comet-ml"
+"comet-ml",
+"typer"
 ]
 
 [project.optional-dependencies]
