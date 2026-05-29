@@ -31,25 +31,59 @@ def clean_detox(
     sample_frac: float = 0.2,
     test_size: float = 0.1,
     random_state: int = 42,
-) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    df_train = df_train.drop_duplicates().reset_index(drop=True)
-    df_val = df_val.drop_duplicates().reset_index(drop=True)
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, dict]:
+    initial_train = len(df_train)
+    initial_val = len(df_val)
 
-    mask_error_train = df_train.astype(str).apply(lambda col: col.str.contains(r"#ERROR!", na=False)).any(axis=1)
-    mask_error_val = df_val.astype(str).apply(lambda col: col.str.contains(r"#ERROR!", na=False)).any(axis=1)
+    df_train_dedup = df_train.drop_duplicates().reset_index(drop=True)
+    df_val_dedup = df_val.drop_duplicates().reset_index(drop=True)
+    duplicates_removed_train = initial_train - len(df_train_dedup)
+    duplicates_removed_val = initial_val - len(df_val_dedup)
 
-    df_train = df_train.loc[~mask_error_train].reset_index(drop=True)
-    df_val = df_val.loc[~mask_error_val].reset_index(drop=True)
+    mask_error_train = df_train_dedup.astype(str).apply(lambda col: col.str.contains(r"#ERROR!", na=False)).any(axis=1)
+    mask_error_val = df_val_dedup.astype(str).apply(lambda col: col.str.contains(r"#ERROR!", na=False)).any(axis=1)
 
+    df_train_no_error = df_train_dedup.loc[~mask_error_train].reset_index(drop=True)
+    df_val_no_error = df_val_dedup.loc[~mask_error_val].reset_index(drop=True)
+    errors_removed_train = len(df_train_dedup) - len(df_train_no_error)
+    errors_removed_val = len(df_val_dedup) - len(df_val_no_error)
+
+    df_train_sampled = df_train_no_error
+    df_val_sampled = df_val_no_error
+    sample_removed_train = 0
+    sample_removed_val = 0
     if 0 < sample_frac < 1:
-        df_train = df_train.sample(frac=sample_frac, random_state=random_state).reset_index(drop=True)
-        df_val = df_val.sample(frac=sample_frac, random_state=random_state).reset_index(drop=True)
+        df_train_sampled = df_train_no_error.sample(frac=sample_frac, random_state=random_state).reset_index(drop=True)
+        df_val_sampled = df_val_no_error.sample(frac=sample_frac, random_state=random_state).reset_index(drop=True)
+        sample_removed_train = len(df_train_no_error) - len(df_train_sampled)
+        sample_removed_val = len(df_val_no_error) - len(df_val_sampled)
 
-    df_train, df_test = train_test_split(df_train, test_size=test_size, random_state=random_state)
-    df_train = df_train.reset_index(drop=True)
-    df_test = df_test.reset_index(drop=True)
+    df_train_final, df_test_final = train_test_split(df_train_sampled, test_size=test_size, random_state=random_state)
+    df_train_final = df_train_final.reset_index(drop=True)
+    df_test_final = df_test_final.reset_index(drop=True)
 
-    return df_train, df_val, df_test
+    stats = {
+        "initial_train": int(initial_train),
+        "initial_val": int(initial_val),
+        "after_dedup_train": int(len(df_train_dedup)),
+        "after_dedup_val": int(len(df_val_dedup)),
+        "duplicates_removed_train": int(duplicates_removed_train),
+        "duplicates_removed_val": int(duplicates_removed_val),
+        "after_error_train": int(len(df_train_no_error)),
+        "after_error_val": int(len(df_val_no_error)),
+        "errors_removed_train": int(errors_removed_train),
+        "errors_removed_val": int(errors_removed_val),
+        "after_sampling_train": int(len(df_train_sampled)),
+        "after_sampling_val": int(len(df_val_sampled)),
+        "sample_removed_train": int(sample_removed_train),
+        "sample_removed_val": int(sample_removed_val),
+        "final_train": int(len(df_train_final)),
+        "final_val": int(len(df_val_sampled)),
+        "final_test": int(len(df_test_final)),
+    }
+    stats["total_removed"] = int((initial_train + initial_val) - (stats["final_train"] + stats["final_val"] + stats["final_test"]))
+
+    return df_train_final, df_val_sampled, df_test_final, stats
 
 
 def save_detox_splits(out_dir: Path, df_train: pd.DataFrame, df_val: pd.DataFrame, df_test: pd.DataFrame) -> None:

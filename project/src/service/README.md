@@ -10,8 +10,6 @@ python -m service
 
 - `GET /health`
 - `GET /ready`
-- `GET /models`
-- `POST /load_weights`
 - `POST /reload`
 - `POST /detox`
 

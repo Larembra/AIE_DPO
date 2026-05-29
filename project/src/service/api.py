@@ -5,6 +5,7 @@ from pathlib import Path
 import torch
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
+import logging
 
 from models.inference import (
     load_multilabel_model,
@@ -87,9 +88,14 @@ class ModelState:
 state = ModelState()
 app = FastAPI(title="AI Detox Service", version="1.0")
 
+# configure logging for the service process so module loggers (models.*, etc.) are visible
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
+logger = logging.getLogger(__name__)
+
 
 def load_weights() -> None:
     device = _device()
+    logger.info("[load_weights] starting load, device=%s", device)
 
     try:
         cfg = _config_dir("multilabel_model")
@@ -102,6 +108,7 @@ def load_weights() -> None:
         state.classifier_max_len = int(inf.get("max_len", 100))
         state.ready_classifier = True
     except Exception:
+        logger.exception("[load_weights] error loading multilabel_model")
         state.ready_classifier = False
 
     try:
@@ -113,6 +120,7 @@ def load_weights() -> None:
         state.spans_max_len = max_len
         state.ready_spans = True
     except Exception:
+        logger.exception("[load_weights] error loading spans_model")
         state.ready_spans = False
 
     try:
@@ -120,6 +128,7 @@ def load_weights() -> None:
         state.detox_model = load_detox_transformer(art, device)
         state.ready_detox = True
     except Exception:
+        logger.exception("[load_weights] error loading detox_model")
         state.ready_detox = False
 
 
@@ -138,17 +147,10 @@ def ready() -> ReadyResponse:
     return ReadyResponse(ready=all(m.ready for m in models), models=models)
 
 
-@app.get("/models", response_model=ModelsResponse)
-def models() -> ModelsResponse:
-    return ModelsResponse(
-        models=[
-            ModelInfo(name="toxicity_classifier", version="1.0"),
-            ModelInfo(name="toxic_token_detector", version="1.2"),
-        ]
-    )
 
 
-@app.post("/load_weights")
+
+
 @app.post("/reload")
 def load_weights_endpoint() -> dict:
     load_weights()
@@ -188,4 +190,3 @@ def detox(req: DetoxRequest) -> DetoxResponse:
 @app.on_event("startup")
 def _startup() -> None:
     load_weights()
-

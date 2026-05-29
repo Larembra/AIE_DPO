@@ -46,7 +46,8 @@ class GRUTagger(nn.Module):
     ):
         super().__init__()
         self.embedding = nn.Embedding(vocab_size, embed_dim, padding_idx=0)
-        self.gru = nn.GRU(
+        # use attribute name 'rnn' to be compatible with notebooks that saved state_dict with 'rnn.*' keys
+        self.rnn = nn.GRU(
             embed_dim,
             hidden_size,
             num_layers=num_layers,
@@ -58,7 +59,7 @@ class GRUTagger(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         emb = self.embedding(x)
-        out, _ = self.gru(emb)
+        out, _ = self.rnn(emb)
         out = self.dropout(out)
         logits = self.head(out).squeeze(-1)
         return logits
