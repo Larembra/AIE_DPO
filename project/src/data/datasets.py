@@ -1,8 +1,6 @@
 from __future__ import annotations
 
 from pathlib import Path
-
-import pandas as pd
 from sklearn.model_selection import train_test_split
 
 from features.text import tokenize, comma_words_to_token_lists
@@ -12,13 +10,10 @@ try:
 except Exception:
     MultilabelStratifiedShuffleSplit = None
 
-try:
-    from datasets import load_dataset
-except Exception:
-    load_dataset = None
 
 
 def load_detox_raw() -> tuple[pd.DataFrame, pd.DataFrame]:
+    import pandas as pd
     splits = {"train": "train.tsv", "validation": "dev.tsv"}
     df_train = pd.read_csv("hf://datasets/s-nlp/ru_paradetox/" + splits["train"], sep="\t")
     df_val = pd.read_csv("hf://datasets/s-nlp/ru_paradetox/" + splits["validation"], sep="\t")
@@ -32,6 +27,7 @@ def clean_detox(
     test_size: float = 0.1,
     random_state: int = 42,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, dict]:
+    import pandas as pd
     initial_train = len(df_train)
     initial_val = len(df_val)
 
@@ -94,6 +90,7 @@ def save_detox_splits(out_dir: Path, df_train: pd.DataFrame, df_val: pd.DataFram
 
 
 def load_multilabel_raw(path: Path) -> pd.DataFrame:
+    import pandas as pd
     data_list = []
     with path.open(encoding="utf-8") as file:
         for line in file:
@@ -214,9 +211,12 @@ def save_multilabel_splits(
 
 
 def load_spans_raw(split: str = "ru") -> pd.DataFrame:
-    if load_dataset is None:
-        raise RuntimeError("datasets is not available")
+    try:
+        from datasets import load_dataset
+    except Exception as e:
+        raise RuntimeError("datasets is not available") from e
     ds = load_dataset("textdetox/multilingual_toxic_spans", split=split)
+    import pandas as pd
     return pd.DataFrame(ds)
 
 
