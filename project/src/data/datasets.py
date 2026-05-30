@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import pandas as pd
 from sklearn.model_selection import train_test_split
 
 from features.text import tokenize, comma_words_to_token_lists
@@ -92,18 +93,39 @@ def save_detox_splits(out_dir: Path, df_train: pd.DataFrame, df_val: pd.DataFram
 def load_multilabel_raw(path: Path) -> pd.DataFrame:
     import pandas as pd
     data_list = []
-    with path.open(encoding="utf-8") as file:
-        for line in file:
-            labels = line.split()[0]
-            text = line[len(labels) + 1 :].strip()
-            labels = labels.split(",")
-            mask = [
-                1 if "__label__NORMAL" in labels else 0,
-                1 if "__label__INSULT" in labels else 0,
-                1 if "__label__THREAT" in labels else 0,
-                1 if "__label__OBSCENITY" in labels else 0,
-            ]
-            data_list.append((text, *mask))
+    # If the provided path does not exist, try to download the dataset from Kaggle
+    data_path = path
+    try:
+        if not data_path.exists():
+            try:
+                from kaggle.api.kaggle_api_extended import KaggleApi
+            except Exception as e:
+                raise RuntimeError("kaggle package is required to download the multilabel dataset but is not available") from e
+
+            data_dir = data_path.parent
+            data_dir.mkdir(parents=True, exist_ok=True)
+            api = KaggleApi()
+            api.authenticate()
+            api.dataset_download_files("alexandersemiletov/toxic-russian-comments", path=str(data_dir), unzip=True, force=True)
+            data_path = data_dir / "dataset.txt"
+
+        with data_path.open(encoding="utf-8") as file:
+            for line in file:
+                labels = line.split()[0]
+                text = line[len(labels) + 1 :].strip()
+                labels = labels.split(",")
+                mask = [
+                    1 if "__label__NORMAL" in labels else 0,
+                    1 if "__label__INSULT" in labels else 0,
+                    1 if "__label__THREAT" in labels else 0,
+                    1 if "__label__OBSCENITY" in labels else 0,
+                ]
+                data_list.append((text, *mask))
+    except FileNotFoundError:
+        raise
+    except Exception:
+        raise
+
     return pd.DataFrame(data_list, columns=["text", "normal", "insult", "threat", "obscenity"])
 
 

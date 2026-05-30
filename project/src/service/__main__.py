@@ -1,3 +1,8 @@
+import os
+
+
+os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
+
 from service.api import app
 
 if __name__ == "__main__":
