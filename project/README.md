@@ -76,10 +76,19 @@ pip install -e .
 
 ## 4. Как запустить проект
 
-### 4.1. Запуск обучения модели
+### 4.1. Запуск обучения модели (сначала нужно подготовить данные)
 
 ```bash
 cd project
+#Загрузка данных
+python -m data load-spans
+python -m data load-multilabel
+python -m data load-detox
+#Подготовка данных
+python -m data clean-spans
+python -m data clean-multilabel
+python -m data clean-detox
+
 python -m models train-detox
 python -m models train-multilabel
 python -m models train-spans
