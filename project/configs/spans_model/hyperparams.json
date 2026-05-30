@@ -1,6 +1,6 @@
 {
   "model": "GRU-tagger",
-  "vocab_size": 3730,
+  "vocab_size": 3049,
   "embed_dim": 100,
   "hidden_size": 128,
   "num_layers": 2,

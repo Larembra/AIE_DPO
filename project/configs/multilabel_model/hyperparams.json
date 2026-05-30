@@ -1,6 +1,6 @@
 {
   "model": "GRU-Text-Classifier",
-  "vocab_size": 46116,
+  "vocab_size": 65337,
   "embed_dim": 100,
   "hidden_size": 64,
   "num_classes": 4,

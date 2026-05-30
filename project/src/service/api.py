@@ -50,6 +50,18 @@ class DetoxResponse(BaseModel):
 
 
 def _project_root() -> Path:
+    # prefer working directory (/app in container) when it contains project layout
+    cwd = Path.cwd()
+    if (cwd / "configs").exists() and (cwd / "artifacts").exists():
+        return cwd
+    # allow override via env var for containerized deployments
+    import os
+
+    env_root = os.environ.get("PROJECT_ROOT")
+    if env_root:
+        p = Path(env_root)
+        if p.exists():
+            return p
     return Path(__file__).resolve().parents[2]
 
 
